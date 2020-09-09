@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "907618388937",
+    "firebase_url": "https://know-your-ability-36dfa.firebaseio.com",
+    "project_id": "know-your-ability-36dfa",
+    "storage_bucket": "know-your-ability-36dfa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907618388937:android:a7ade428c0787ecb653618",
+        "android_client_info": {
+          "package_name": "com.gaming.know_your_ability"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907618388937-oc9iasc4g364av1svk2gja4i5pbelmv8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gaming.know_your_ability",
+            "certificate_hash": "8243170a78a7b533b92642a592846c1c1cd0cf63"
+          }
+        },
+        {
+          "client_id": "907618388937-7ef0agukrbaqr5ddd1fucc352cmv0hh9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaY_tsTLJPfZhTOJIQw-Hbj1n5WndMdzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907618388937-7ef0agukrbaqr5ddd1fucc352cmv0hh9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
