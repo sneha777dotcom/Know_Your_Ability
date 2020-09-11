@@ -121,7 +121,7 @@ public class ProfileActivity extends AppCompatActivity implements
             ProfileFragment fragment = new ProfileFragment();
             FragmentTransaction transaction = ProfileActivity.this.getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.container, fragment);
-            transaction.addToBackStack(getString(R.string.profile_fragment));
+//            transaction.addToBackStack(getString(R.string.profile_fragment));
             transaction.commit();
         }
     }

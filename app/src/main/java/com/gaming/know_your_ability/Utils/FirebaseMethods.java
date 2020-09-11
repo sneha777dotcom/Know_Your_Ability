@@ -478,6 +478,9 @@ public class FirebaseMethods {
                                     .getValue(UserAccountSettings.class)
                                     .getDisplay_name()
                     );
+                    if (!ds.child(userID)
+                            .getValue(UserAccountSettings.class)
+                            .getUsername().isEmpty())
                     settings.setUsername(
                             ds.child(userID)
                                     .getValue(UserAccountSettings.class)
@@ -525,44 +528,45 @@ public class FirebaseMethods {
             Log.d(TAG, "getUserSettings: snapshot key: " + ds.getKey());
             if(ds.getKey().equals(mContext.getString(R.string.dbname_users))) {
                 Log.d(TAG, "getUserAccountSettings: users node datasnapshot: " + ds);
+                if (ds.child(userID).getValue(User.class) != null) {
+                    user.setUsername(
+                            ds.child(userID)
+                                    .getValue(User.class)
+                                    .getUsername()
+                    );
+                    user.setEmail(
+                            ds.child(userID)
+                                    .getValue(User.class)
+                                    .getEmail()
+                    );
+                    user.setPhone_number(
+                            ds.child(userID)
+                                    .getValue(User.class)
+                                    .getPhone_number()
+                    );
+                    user.setUser_id(
+                            ds.child(userID)
+                                    .getValue(User.class)
+                                    .getUser_id()
+                    );
+                    user.setDob(
+                            ds.child(userID)
+                                    .getValue(User.class)
+                                    .getDob()
+                    );
+                    user.setSchool(
+                            ds.child(userID)
+                                    .getValue(User.class)
+                                    .getSchool()
+                    );
+                    user.setClasses(
+                            ds.child(userID)
+                                    .getValue(User.class)
+                                    .getClasses()
+                    );
 
-                user.setUsername(
-                        ds.child(userID)
-                                .getValue(User.class)
-                                .getUsername()
-                );
-                user.setEmail(
-                        ds.child(userID)
-                                .getValue(User.class)
-                                .getEmail()
-                );
-                user.setPhone_number(
-                        ds.child(userID)
-                                .getValue(User.class)
-                                .getPhone_number()
-                );
-                user.setUser_id(
-                        ds.child(userID)
-                                .getValue(User.class)
-                                .getUser_id()
-                );
-                user.setDob(
-                        ds.child(userID)
-                                .getValue(User.class)
-                                .getDob()
-                );
-                user.setSchool(
-                        ds.child(userID)
-                                .getValue(User.class)
-                                .getSchool()
-                );
-                user.setClasses(
-                        ds.child(userID)
-                                .getValue(User.class)
-                                .getClasses()
-                );
-
-                Log.d(TAG, "getUserAccountSettings: retrieved users information: " + user.toString());
+                    Log.d(TAG, "getUserAccountSettings: retrieved users information: " + user.toString());
+                }
             }
         }
         return new UserSettings(user, settings);
