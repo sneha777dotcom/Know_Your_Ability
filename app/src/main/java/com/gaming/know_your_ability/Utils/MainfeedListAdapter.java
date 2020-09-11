@@ -47,7 +47,7 @@ import androidx.annotation.Nullable;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class MainfeedListAdapter extends ArrayAdapter<Photo> {
+public class MainfeedListAdapter extends  ArrayAdapter<Photo> {
 
     public interface OnLoadMoreItemsListener{
         void onLoadMoreItems();

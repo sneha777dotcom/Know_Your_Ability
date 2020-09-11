@@ -1,9 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
-    <RelativeLayout
+    <EditText
+        android:id="@+id/editPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+    android:layout_marginTop="50dp"
+    android:autofillHints=""
+    android:ems="10"
+    android:hint="@string/person_name"
+    android:inputType="textPersonName"
+        />
+   <EditText
+        android:id="@+id/editTextSchool"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="200dp"
+    android:layout_marginTop="50dp"
+    android:autofillHints=""
+    android:ems="10"
+    android:hint="@string/Schoolname"
+    android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginLeft="-72dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:onClick="InsertButton"
+        android:text="@string/insert" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="200dp" />
+
+    <SearchView
+        android:id="@+id/serachview"
+    android:layout_width="350dp"
+    android:layout_height="35dp"
+    android:layout_marginStart="20dp"
+        android:layout_below="@+id/editPersonName"
+    android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/textViewSearch"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+        android:layout_below="@id/serachview"
+    android:layout_marginStart="30dp"
+    android:layout_marginTop="20dp"
+    android:text="@string/search_result"/>
+</RelativeLayout>
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
@@ -19,5 +77,4 @@
             android:layout_below="@+id/relLayout1">
         </ListView>
     </RelativeLayout>
-    <include layout="@layout/layout_bottom_navigation_view"/>
-</RelativeLayout>
+    <include layout="@layout/layout_bottom_navigation_view"/>-->

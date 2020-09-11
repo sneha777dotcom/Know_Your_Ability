@@ -11,8 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.gaming.know_your_ability.Models.User;
 import com.gaming.know_your_ability.Profile.ProfileActivity;
@@ -30,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,9 +42,17 @@ public class SearchActivity extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 1;
 
     private Context mContext = SearchActivity.this;
+    private EditText editTextPerson;
+    private EditText editTextSchool;
+
+    private DatabaseReference myRef;
+    private String ValueDatabase;
+    private String refinedData;
 
     //widgets
-    private EditText mSearchParam;
+   // private EditText mSearchParam;
+    private SearchView searchView;
+    private TextView textViewSearch;
     private ListView mListView;
 
     //vars
@@ -51,12 +63,50 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        mSearchParam = (EditText) findViewById(R.id.search);
+       // mSearchParam = (EditText) findViewById(R.id.search);
         mListView = (ListView) findViewById(R.id.listView);
         Log.d(TAG, "onCreate: started.");
+        myRef = FirebaseDatabase.getInstance().getReference();
 
-        hideSoftKeyboard();
-        setupBottomNavigationView();
+       editTextSchool = findViewById(R.id.editTextSchool);
+       editTextPerson = findViewById(R.id.editPersonName);
+        searchView = findViewById(R.id.serachview);
+        textViewSearch = findViewById(R.id.textViewSearch);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ValueDatabase = dataSnapshot.getValue().toString();
+                refinedData = ValueDatabase.substring(1,ValueDatabase.length()-1);
+                String List[] = refinedData.split(",");
+                mListView.setAdapter(new ArrayAdapter<String>(SearchActivity.this, android.R.layout.simple_list_item_1, List));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                int SearchIndex = refinedData.indexOf(query);
+                String SearchResult = refinedData.substring(SearchIndex);
+                String SearchSplit[] = SearchResult.split(",");
+                textViewSearch.setText(SearchSplit[0]);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+            hideSoftKeyboard();
+       // setupBottomNavigationView();
         initTextListener();
     }
 
@@ -65,7 +115,7 @@ public class SearchActivity extends AppCompatActivity {
 
         mUserList = new ArrayList<>();
 
-        mSearchParam.addTextChangedListener(new TextWatcher() {
+        editTextPerson.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -79,7 +129,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-                String text = mSearchParam.getText().toString().toLowerCase(Locale.getDefault());
+                String text = editTextPerson.getText().toString().toLowerCase(Locale.getDefault());
                 searchForMatch(text);
             }
         });
@@ -158,4 +208,13 @@ public class SearchActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
     }
-}
+
+    public void InsertButton(View view) {
+        try {
+            myRef.child(editTextPerson.getText().toString()).setValue(editTextSchool.getText().toString());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    }
